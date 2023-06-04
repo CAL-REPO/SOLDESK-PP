@@ -17,7 +17,7 @@ provider "aws" {
 }
 
 module "AWS_REG1_KEY" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2KEY"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2KEY.git"
     providers = {
         aws = aws.Seoul
     }
@@ -27,7 +27,7 @@ module "AWS_REG1_KEY" {
 }
 
 module "AWS_REG1_ADD" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/ADD"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-ADD.git"
     providers = {
         aws = aws.Seoul
     }
@@ -37,7 +37,7 @@ module "AWS_REG1_ADD" {
 }
 
 module "AWS_REG1_VPC1" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/VPC"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-VPC.git"
     providers = {
         aws = aws.Seoul
     }
@@ -49,7 +49,7 @@ module "AWS_REG1_VPC1" {
 }
 
 module "AWS_REG1_VPC1_INS" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2INS"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2INS.git"
     providers = {
         aws = aws.Seoul
     }
@@ -60,7 +60,7 @@ module "AWS_REG1_VPC1_INS" {
 }
 
 module "AWS_REG1_VPC2" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/VPC"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-VPC.git"
     providers = {
         aws = aws.Seoul
     }
@@ -72,7 +72,7 @@ module "AWS_REG1_VPC2" {
 }
 
 module "AWS_REG1_VPC2_INS" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2INS"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2INS.git"
     providers = {
         aws = aws.Seoul
     }
@@ -83,7 +83,7 @@ module "AWS_REG1_VPC2_INS" {
 }
 
 module "AWS_REG1_CONNECTION" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/CONNECTION"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-CONNECTION.git"
     providers = {
         aws = aws.Seoul
     }
@@ -100,7 +100,7 @@ module "AWS_REG1_CONNECTION" {
 }
 
 module "AWS_REG1_SERVICE" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/SERVICE"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-SERVICE.git"
     providers = {
         aws = aws.Seoul
     }
@@ -127,7 +127,7 @@ provider "aws" {
 }
 
 module "AWS_REG2_KEY" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2KEY"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2KEY.git"
     providers = {
         aws = aws.Singapore
     }
@@ -137,7 +137,7 @@ module "AWS_REG2_KEY" {
 }
 
 module "AWS_REG2_ADD" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/ADD"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-ADD.git"
     providers = {
         aws = aws.Singapore
     }
@@ -147,7 +147,7 @@ module "AWS_REG2_ADD" {
 }
 
 module "AWS_REG2_VPC1" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/VPC"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-VPC.git"
     providers = {
         aws = aws.Singapore
     }
@@ -159,7 +159,7 @@ module "AWS_REG2_VPC1" {
 }
 
 module "AWS_REG2_VPC1_INS" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2INS"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2INS.git"
     providers = {
         aws = aws.Singapore
     }
@@ -170,7 +170,7 @@ module "AWS_REG2_VPC1_INS" {
 }
 
 module "AWS_REG2_VPC2" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/VPC"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-VPC.git"
     providers = {
         aws = aws.Singapore
     }
@@ -182,7 +182,7 @@ module "AWS_REG2_VPC2" {
 }
 
 module "AWS_REG2_VPC2_INS" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2INS"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2INS.git"
     providers = {
         aws = aws.Singapore
     }
@@ -193,7 +193,7 @@ module "AWS_REG2_VPC2_INS" {
 }
 
 module "AWS_REG2_CONNECTION" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/CONNECTION"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-CONNECTION.git"
     providers = {
         aws = aws.Singapore
     }
@@ -210,7 +210,7 @@ module "AWS_REG2_CONNECTION" {
 }
 
 module "AWS_REG2_SERVICE" {
-    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/SERVICE"
+    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-SERVICE.git"
     providers = {
         aws = aws.Singapore
     }
