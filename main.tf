@@ -1,95 +1,97 @@
+# Standard AWS Provider Block
+terraform {
+    required_version = ">= 1.0"
+    required_providers {
+        aws = {
+            source  = "hashicorp/aws"
+            version = ">= 5.0"
+        }
+    }
+}
+
+# AWS_REG1
+provider "aws" {
+    region = local.AWS_REGIONs[0].CODE
+    profile = local.AWS_PROFILEs[0].NAME
+    alias = "Seoul"
+}
+
 module "AWS_REG1_KEY" {
-    source = "./modules/01.key"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2KEY"
     providers = {
         aws = aws.Seoul
     }
-    KEY_NAME = var.KEY["NAME"]
-    KEY_BACKUP_FILE = local.KEY_FILE["AWS_REG1"].BACKUP
-    KEY_SSH_FILE = local.KEY_FILE["AWS_REG1"].SSH
-    KEY_HOME_FILE = local.KEY_FILE["AWS_REG1"].HOME
+
+    PROFILE = local.AWS_PROFILEs[0].NAME
+    KEYs = local.AWS_REG1_KEYs
 }
 
 module "AWS_REG1_ADD" {
-    source = "./modules/03.add"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/ADD"
     providers = {
         aws = aws.Seoul
     }
-    depends_on = [ module.AWS_REG1_KEY ]
-    DEFAULT_EIP_NAME = local.AWS_REG1_DEFAULT_EIP_NAME
-    DEFAULT_EIP_INS_ID = local.AWS_REG1_DEFAULT_EIP_INS_ID
-    ADD_EIP_NAME = local.AWS_REG1_ADD_EIP_NAME
-    ADD_NIC_NAME = local.AWS_REG1_ADD_NIC_NAME
-    ADD_NIC_INS_ID = local.AWS_REG1_ADD_NIC_INS_ID
-    ADD_NIC_INFO = local.AWS_REG1_ADD_NIC_INFO
+
+    PROFILE = local.AWS_PROFILEs[0].NAME
+    EIPs = local.AWS_REG1_EIPs
 }
 
 module "AWS_REG1_VPC1" {
-    source = "./modules/02.vpc"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/VPC"
     providers = {
         aws = aws.Seoul
     }
-    depends_on = [ module.AWS_REG1_KEY ]
-    VPC = var.AWS["REG1_VPC1"]
-    VPC_SG_NAME = local.AWS_REG1_VPC1_SG.NAME
-    VPC_SG_RULE = local.AWS_REG1_VPC1_SG.RULE
-    VPC_RTB = local.AWS_REG1_VPC1_RTB
+
+    PROFILE = local.AWS_PROFILEs[0].NAME
+    VPC = local.AWS_REG1_VPC1
+    SGs = local.AWS_REG1_VPC1_SGs
+    RTBs = local.AWS_REG1_VPC1_RTBs
 }
 
 module "AWS_REG1_VPC1_INS" {
-    source = "./modules/05.ec2"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2INS"
     providers = {
         aws = aws.Seoul
     }
-    depends_on = [ module.AWS_REG1_GW ]
-    INS_KEY_FILE = local.KEY_FILE["AWS_REG1"].SSH
-    INS_NAME = local.AWS_REG1_VPC1_INS_NAME
-    INS_INFO = local.AWS_REG1_VPC1_INS_INFO
-    INS_VOL = local.AWS_REG1_VPC1_INS_DEFAULT_VOL
-    INS_UD = local.AWS_REG1_VPC1_INS_UD
+
+    PROFILE = local.AWS_PROFILEs[0].NAME
+    INSs = local.AWS_REG1_VPC1_INSs
+    INS_UDs = local.AWS_REG1_VPC1_INS_UDs
 }
 
 module "AWS_REG1_VPC2" {
-    source = "./modules/02.vpc"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/VPC"
     providers = {
         aws = aws.Seoul
     }
-    depends_on = [ module.AWS_REG1_KEY ]
-    VPC = var.AWS["REG1_VPC2"]
-    VPC_SG_NAME = local.AWS_REG1_VPC2_SG.NAME
-    VPC_SG_RULE = local.AWS_REG1_VPC2_SG.RULE
-    VPC_RTB = local.AWS_REG1_VPC2_RTB
+
+    PROFILE = local.AWS_PROFILEs[0].NAME
+    VPC = local.AWS_REG1_VPC2
+    SGs = local.AWS_REG1_VPC2_SGs
+    RTBs = local.AWS_REG1_VPC2_RTBs
 }
 
 module "AWS_REG1_VPC2_INS" {
-    source = "./modules/05.ec2"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2INS"
     providers = {
         aws = aws.Seoul
     }
-    depends_on = [ module.AWS_REG1_GW ]
-    INS_KEY_FILE = local.KEY_FILE["AWS_REG1"].SSH
-    INS_NAME = local.AWS_REG1_VPC2_INS_NAME
-    INS_INFO = local.AWS_REG1_VPC2_INS_INFO
-    INS_VOL = local.AWS_REG1_VPC2_INS_DEFAULT_VOL
-    INS_UD = local.AWS_REG1_VPC2_INS_UD
-}
 
-module "AWS_REG1_GW" {
-    source = "./modules/04.gw"
-    providers = {
-        aws = aws.Seoul
-    }
-    depends_on = [ module.AWS_REG1_KEY ]
-    IGW = local.AWS_REG1_IGW
-    CGW = local.AWS_REG1_CGW
-    TGW = local.AWS_REG1_TGW
+    PROFILE = local.AWS_PROFILEs[0].NAME
+    INSs = local.AWS_REG1_VPC2_INSs
+    INS_UDs = local.AWS_REG1_VPC2_INS_UDs
 }
 
 module "AWS_REG1_CONNECTION" {
-    source = "./modules/06.connection"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/CONNECTION"
     providers = {
         aws = aws.Seoul
     }
-    depends_on = [ module.AWS_REG1_GW ]
+
+    PROFILE = local.AWS_PROFILEs[0].NAME
+    IGW = local.AWS_REG1_IGW
+    CGW = local.AWS_REG1_CGW
+    TGW = local.AWS_REG1_TGW    
     TGW_CON_VPC = local.AWS_REG1_TGW_CON_VPC
     TGW_CON_CGW = local.AWS_REG1_TGW_CON_CGW
     TGW_PEER_REQUEST = local.AWS_REG1_TGW_PEER_REQUEST
@@ -98,16 +100,17 @@ module "AWS_REG1_CONNECTION" {
 }
 
 module "AWS_REG1_SERVICE" {
-    source = "./modules/07.service"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/SERVICE"
     providers = {
         aws = aws.Seoul
     }
-    depends_on = [ module.AWS_REG1_VPC1 ]
-    ZONE = local.AWS_REG1_VPC1_ZONE
-    ZONE_RECORD = local.AWS_REG1_ZONE_RECORD
-    RESOLV_EP = local.AWS_REG1_VPC1_RESOLV_EP
-    RESOLV_EP_RULE = local.AWS_REG1_VPC1_RESOLV_EP_RULE
-    RT53_HC = local.AWS_REG1_VPC1_RT53_HC
+
+    PROFILE = local.AWS_PROFILEs[0].NAME
+    RT53_ZONE = local.AWS_REG1_RT53_ZONE
+    RT53_ZONE_RECORD = local.AWS_REG1_RT53_ZONE_RECORD
+    RT53_HC =  local.AWS_REG1_RT53_HC
+    RT53_RESOLV_EP = local.AWS_REG1_RT53_RESOLV_EP
+    RT53_RESOLV_EP_RULE = local.AWS_REG1_RT53_RESOLV_EP_RULE
     LB_TG = local.AWS_REG1_LB_TG
     LB_TG_ATT = local.AWS_REG1_LB_TG_ATT
     LB = local.AWS_REG1_LB
@@ -116,123 +119,107 @@ module "AWS_REG1_SERVICE" {
     GAC_EP = local.AWS_REG1_GAC_EP
 }
 
+# AWS_REG2
+provider "aws" {
+    region = local.AWS_REGIONs[1].CODE
+    profile = local.AWS_PROFILEs[1].NAME
+    alias = "Singapore"
+}
+
 module "AWS_REG2_KEY" {
-    source = "./modules/01.key"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2KEY"
     providers = {
         aws = aws.Singapore
     }
-    KEY_NAME = var.KEY["NAME"]
-    KEY_BACKUP_FILE = local.KEY_FILE["AWS_REG2"].BACKUP
-    KEY_SSH_FILE = local.KEY_FILE["AWS_REG2"].SSH
-    KEY_HOME_FILE = local.KEY_FILE["AWS_REG2"].HOME
+
+    PROFILE = local.AWS_PROFILEs[1].NAME
+    KEYs = local.AWS_REG2_KEYs
 }
 
 module "AWS_REG2_ADD" {
-    source = "./modules/03.add"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/ADD"
     providers = {
         aws = aws.Singapore
     }
-    depends_on = [ module.AWS_REG2_KEY ]
-    DEFAULT_EIP_NAME = local.AWS_REG2_DEFAULT_EIP_NAME
-    DEFAULT_EIP_INS_ID = local.AWS_REG2_DEFAULT_EIP_INS_ID
-    ADD_EIP_NAME = local.AWS_REG2_ADD_EIP_NAME
-    ADD_NIC_NAME = local.AWS_REG2_ADD_NIC_NAME
-    ADD_NIC_INS_ID = local.AWS_REG2_ADD_NIC_INS_ID
-    ADD_NIC_INFO = local.AWS_REG2_ADD_NIC_INFO
+
+    PROFILE = local.AWS_PROFILEs[1].NAME
+    EIPs = local.AWS_REG2_EIPs
 }
 
 module "AWS_REG2_VPC1" {
-    source = "./modules/02.vpc"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/VPC"
     providers = {
         aws = aws.Singapore
     }
-    depends_on = [ module.AWS_REG2_KEY ]
-    VPC = var.AWS.REG2_VPC1
-    VPC_SG_NAME = local.AWS_REG2_VPC1_SG.NAME
-    VPC_SG_RULE = local.AWS_REG2_VPC1_SG.RULE
-    VPC_RTB = local.AWS_REG2_VPC1_RTB
+
+    PROFILE = local.AWS_PROFILEs[1].NAME
+    VPC = local.AWS_REG2_VPC1
+    SGs = local.AWS_REG2_VPC1_SGs
+    RTBs = local.AWS_REG2_VPC1_RTBs
 }
 
 module "AWS_REG2_VPC1_INS" {
-    source = "./modules/05.ec2"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2INS"
     providers = {
         aws = aws.Singapore
     }
-    depends_on = [ module.AWS_REG2_GW ]
-    INS_KEY_FILE = local.KEY_FILE["AWS_REG2"].SSH
-    INS_NAME = local.AWS_REG2_VPC1_INS_NAME
-    INS_INFO = local.AWS_REG2_VPC1_INS_INFO
-    INS_VOL = local.AWS_REG2_VPC1_INS_DEFAULT_VOL
-    INS_UD = local.AWS_REG2_VPC1_INS_UD
+
+    PROFILE = local.AWS_PROFILEs[1].NAME
+    INSs = local.AWS_REG2_VPC1_INSs
+    INS_UDs = local.AWS_REG2_VPC1_INS_UDs
 }
 
 module "AWS_REG2_VPC2" {
-    source = "./modules/02.vpc"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/VPC"
     providers = {
         aws = aws.Singapore
     }
-    depends_on = [ module.AWS_REG2_KEY ]
-    VPC = var.AWS["REG2_VPC2"]
-    VPC_SG_NAME = local.AWS_REG2_VPC2_SG.NAME
-    VPC_SG_RULE = local.AWS_REG2_VPC2_SG.RULE
-    VPC_RTB = local.AWS_REG2_VPC2_RTB
+
+    PROFILE = local.AWS_PROFILEs[1].NAME
+    VPC = local.AWS_REG2_VPC2
+    SGs = local.AWS_REG2_VPC2_SGs
+    RTBs = local.AWS_REG2_VPC2_RTBs
 }
 
 module "AWS_REG2_VPC2_INS" {
-    source = "./modules/05.ec2"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/EC2INS"
     providers = {
         aws = aws.Singapore
     }
-    depends_on = [ module.AWS_REG2_GW ]
-    INS_KEY_FILE = local.KEY_FILE["AWS_REG2"].SSH
-    INS_NAME = local.AWS_REG2_VPC2_INS_NAME
-    INS_INFO = local.AWS_REG2_VPC2_INS_INFO
-    INS_VOL = local.AWS_REG2_VPC2_INS_DEFAULT_VOL
-    INS_UD = local.AWS_REG2_VPC2_INS_UD
-}
 
-module "AWS_REG2_GW" {
-    source = "./modules/04.gw"
-    providers = {
-        aws = aws.Singapore
-    }
-    depends_on = [ module.AWS_REG2_KEY ]
-    IGW = local.AWS_REG2_IGW
-    CGW = local.AWS_REG2_CGW
-    TGW = local.AWS_REG2_TGW
+    PROFILE = local.AWS_PROFILEs[1].NAME
+    INSs = local.AWS_REG2_VPC2_INSs
+    INS_UDs = local.AWS_REG2_VPC2_INS_UDs
 }
 
 module "AWS_REG2_CONNECTION" {
-    source = "./modules/06.connection"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/CONNECTION"
     providers = {
         aws = aws.Singapore
     }
-    depends_on = [ module.AWS_REG2_GW ]
+
+    PROFILE = local.AWS_PROFILEs[1].NAME
+    IGW = local.AWS_REG2_IGW
+    CGW = local.AWS_REG2_CGW
+    TGW = local.AWS_REG2_TGW
     TGW_CON_VPC = local.AWS_REG2_TGW_CON_VPC
-    TGW_CON_CGW = local.AWS_REG2_TGW_CON_CGW
+    TGW_CON_CGW = local.AWS_REG2_TGW_CON_CGW    
     TGW_PEER_ACCEPT = local.AWS_REG2_TGW_PEER_ACCEPT
     TGW_PEER_ACCEPT_ADD_ROUTE = local.AWS_REG2_TGW_PEER_ACCEPT_ADD_ROUTE
     PEER_ACCEPT = local.AWS_REG2_PEER_ACCEPT
 }
 
 module "AWS_REG2_SERVICE" {
-    source = "./modules/07.service"
+    source = "/mnt/c/Users/thkim/CALife/CALife - CODE/04.MODULE/TERRAFORM/AWS/SERVICE"
     providers = {
         aws = aws.Singapore
     }
-    depends_on = [ module.AWS_REG2_VPC1 ]
-    ZONE = local.AWS_REG2_VPC1_ZONE
-    ZONE_RECORD = local.AWS_REG2_ZONE_RECORD
-    RESOLV_EP = local.AWS_REG2_VPC1_RESOLV_EP
-    RESOLV_EP_RULE = local.AWS_REG2_VPC1_RESOLV_EP_RULE
-    RT53_HC = local.AWS_REG2_VPC1_RT53_HC
-    GAC_EP = local.AWS_REG2_GAC_EP
-}
 
-module "AWS_GLOBAL_SERVICE" {
-    source = "./modules/07.service"
-    providers = {
-        aws = aws.Seoul
-    }
-    depends_on = [ module.AWS_REG1_SERVICE, module.AWS_REG2_SERVICE ]
+    PROFILE = local.AWS_PROFILEs[1].NAME
+    RT53_ZONE = local.AWS_REG2_RT53_ZONE
+    RT53_ZONE_RECORD = local.AWS_REG2_RT53_ZONE_RECORD
+    RT53_HC =  local.AWS_REG2_RT53_HC
+    RT53_RESOLV_EP = local.AWS_REG2_RT53_RESOLV_EP
+    RT53_RESOLV_EP_RULE =local.AWS_REG2_RT53_RESOLV_EP_RULE
+    GAC_EP = local.AWS_REG2_GAC_EP    
 }

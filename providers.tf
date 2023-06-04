@@ -1,22 +1,29 @@
-# Standard AWS Provider Block
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 1.0"
+# Provider Data
+locals {
+
+    PRJ = {
+        NAME = "SPP"
+        VERSION = "1.0"
     }
 
-  }
-}
+    AWS_PROFILE = "thkim"
 
-provider "aws" {
-    region = local.PROFILES["AWS_REG1"].CODE
-    profile = local.PROFILES["AWS_REG1"].NAME
-    alias = "Seoul"
-}
+    AWS_REGIONs = [
+        {
+            NAME = "Seoul"
+            CODE = "ap-northeast-2"
+        }
+        ,{
+            NAME = "Singapore"
+            CODE = "ap-southeast-1"
+        }
+    ]
 
-provider "aws" {
-    region = local.PROFILES["AWS_REG2"].CODE
-    profile = local.PROFILES["AWS_REG2"].NAME
-    alias = "Singapore"
+    AWS_PROFILEs = {
+        for EACH, AWS_REGION in local.AWS_REGIONs:
+            EACH => {
+                NAME = "${local.AWS_PROFILE}_${AWS_REGION.NAME}"
+            }
+    }
+
 }
