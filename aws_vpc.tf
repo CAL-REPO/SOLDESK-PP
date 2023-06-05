@@ -75,7 +75,7 @@ locals {
 # REG1
 locals {
     AWS_REG1_VPC1 = {
-        NAME                = "SEOUL_VPC"
+        NAME                = "AWS_SEOUL_VPC"
         CIDR                = "10.1.0.0/16"
         DNS_SUP             = true
         DNS_HOST            = true
@@ -85,8 +85,8 @@ locals {
         DHCP_DOMAIN_NTPs    = []
         DHCP_DOMAIN_NBSs    = []
         DHCP_DOMAIN_NODE    = null
-        Za_SN1_NAME         = "SEOUL_Za_SN1_NAT1"
-        Za_SN2_NAME         = "SEOUL_Za_SN2_WEB1"
+        Za_SN1_NAME         = "AWS_SEOUL_NAT1_Za_SN"
+        Za_SN2_NAME         = "AWS_SEOUL_WEB1_Za_SN"
         Za_SN3_NAME         = ""
         Za_SN1_CIDR         = "10.1.1.0/24"
         Za_SN2_CIDR         = "10.1.3.0/24"
@@ -97,15 +97,15 @@ locals {
         Zb_SN1_CIDR         = ""
         Zb_SN2_CIDR         = ""
         Zb_SN3_CIDR         = ""
-        Zc_SN1_NAME         = "SEOUL_Zc_SN1_NAT2"
-        Zc_SN2_NAME         = "SEOUL_Zc_SN2_WEB2"
+        Zc_SN1_NAME         = "AWS_SEOUL_NAT2_Zc_SN"
+        Zc_SN2_NAME         = "AWS_SEOUL_WEB2_Zc_SN"
         Zc_SN3_NAME         = ""
         Zc_SN1_CIDR         = "10.1.2.0/24"
         Zc_SN2_CIDR         = "10.1.4.0/24"
         Zc_SN3_CIDR         = ""
     }
     AWS_REG1_VPC2 = {
-        NAME                = "SEOUL_IDC_VPC"
+        NAME                = "IDC_SEOUL_VPC"
         CIDR                = "10.2.0.0/16"
         DNS_SUP             = true
         DNS_HOST            = true
@@ -115,8 +115,8 @@ locals {
         DHCP_DOMAIN_NTPs    = []
         DHCP_DOMAIN_NBSs    = []
         DHCP_DOMAIN_NODE    = null
-        Za_SN1_NAME         = "SEOUL_IDC_Za_SN1_CGW"
-        Za_SN2_NAME         = "SEOUL_IDC_Za_SN2_DB_DNS"
+        Za_SN1_NAME         = "IDC_SEOUL_CGW_Za_SN"
+        Za_SN2_NAME         = "IDC_SEOUL_DB_DNS_Za_SN"
         Za_SN3_NAME         = ""
         Za_SN1_CIDR         = "10.2.0.0/24"
         Za_SN2_CIDR         = "10.2.1.0/24"
@@ -137,7 +137,7 @@ locals {
     AWS_REG1_VPC1_RTBs = [
         # RTB1
         {   
-            NAME = "SEOUL_Za_SN1_RTB" 
+            NAME = "AWS_SEOUL_NAT1_RTB"
             SN_ID = module.AWS_REG1_VPC1.Za_SN1_ID
             ROUTE = [
                 {
@@ -160,7 +160,7 @@ locals {
         }
         # RTB2
         ,{
-            NAME = "SEOUL_Za_SN2_RTB"
+            NAME = "AWS_SEOUL_WEB1_RTB"
             SN_ID = module.AWS_REG1_VPC1.Za_SN2_ID
             ROUTE = [
                 {
@@ -171,7 +171,7 @@ locals {
         }
         # RTB3
         ,{
-            NAME = "SEOUL_Zc_SN1_RTB"
+            NAME = "AWS_SEOUL_NAT2_RTB"
             SN_ID = module.AWS_REG1_VPC1.Zc_SN1_ID
             ROUTE = [
                 {
@@ -194,7 +194,7 @@ locals {
         }
         # RTB4
         ,{
-            NAME = "SEOUL_Zc_SN2_RTB"
+            NAME = "AWS_SEOUL_WEB2_RTB"
             SN_ID = module.AWS_REG1_VPC1.Zc_SN2_ID
             ROUTE = [
                 {
@@ -207,7 +207,7 @@ locals {
     AWS_REG1_VPC2_RTBs = [
         # RTB1
         {   
-            NAME = "SEOUL_IDC_Za_SN1_RTB" 
+            NAME = "IDC_SEOUL_CGW_RTB" 
             SN_ID = module.AWS_REG1_VPC2.Za_SN1_ID
             ROUTE = [
                 {
@@ -218,7 +218,7 @@ locals {
         }
         # RTB2
         ,{
-            NAME = "SEOUL_IDC_Za_SN2_RTB"
+            NAME = "IDC_SEOUL_DB_DNS_RTB"
             SN_ID = module.AWS_REG1_VPC2.Za_SN2_ID
             ROUTE = [
                 {
@@ -234,7 +234,7 @@ locals {
     ]
     AWS_REG1_VPC1_SGs = [
         {
-            NAME = "NAT1_SG"
+            NAME = "AWS_SEOUL_NAT1_SG"
             INGRESS = [ 
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -251,7 +251,7 @@ locals {
             ]
         },
         {
-            NAME = "NAT2_SG"
+            NAME = "AWS_SEOUL_NAT2_SG"
             INGRESS = [ 
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -266,7 +266,7 @@ locals {
             ]
         }        
         ,{
-            NAME = "WEB_SG"
+            NAME = "AWS_SEOUL_WEB_SG"
             INGRESS = [
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -281,7 +281,7 @@ locals {
             ]
         }
         ,{
-            NAME = "ALB_SG"
+            NAME = "AWS_SEOUL_ALB_SG"
             INGRESS = [
                 local.SG_HTTP
             ]
@@ -292,7 +292,7 @@ locals {
     ]
     AWS_REG1_VPC2_SGs = [
         {
-            NAME = "CGW_SG"
+            NAME = "IDC_SEOUL_CGW_SG"
             INGRESS = [ 
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -309,7 +309,7 @@ locals {
             ]
         },
         {
-            NAME = "DB_SG"
+            NAME = "IDC_SEOUL_DB_SG"
             INGRESS = [ 
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -365,11 +365,11 @@ locals {
         Zb_SN1_CIDR         = ""
         Zb_SN2_CIDR         = ""
         Zb_SN3_CIDR         = ""
-        Zc_SN1_NAME         = ""
-        Zc_SN2_NAME         = "SINGAPORE_Zc_SN2"
+        Zc_SN1_NAME         = "SINGAPORE_Zc_SN2"
+        Zc_SN2_NAME         = ""
         Zc_SN3_NAME         = ""
-        Zc_SN1_CIDR         = ""
-        Zc_SN2_CIDR         = "10.3.4.0/24"
+        Zc_SN1_CIDR         = "10.3.4.0/24"
+        Zc_SN2_CIDR         = ""
         Zc_SN3_CIDR         = ""
     }
     AWS_REG2_VPC2 = {

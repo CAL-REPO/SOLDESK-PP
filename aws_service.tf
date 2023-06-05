@@ -257,7 +257,7 @@ locals {
                     IP = "10.3.3.150"
                 }
                 ,{
-                    SN_ID = module.AWS_REG2_VPC1.Zc_SN2_ID
+                    SN_ID = module.AWS_REG2_VPC1.Zc_SN1_ID
                     IP = "10.3.4.150"
                 }
             ]
