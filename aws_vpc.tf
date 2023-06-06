@@ -324,7 +324,7 @@ locals {
             ]
         }        
         ,{
-            NAME = "DNS_SG"
+            NAME = "IDC_SEOUL_DNS_SG"
             INGRESS = [
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -343,7 +343,7 @@ locals {
 # REG2
 locals {
     AWS_REG2_VPC1 = {
-        NAME                = "SINGAPORE_VPC"
+        NAME                = "AWS_SINGAPORE_VPC"
         CIDR                = "10.3.0.0/16"
         DNS_SUP             = true
         DNS_HOST            = true
@@ -353,8 +353,8 @@ locals {
         DHCP_DOMAIN_NTPs    = []
         DHCP_DOMAIN_NBSs    = []
         DHCP_DOMAIN_NODE    = null
-        Za_SN1_NAME         = "SINGAPORE_Za_SN1_NAT"
-        Za_SN2_NAME         = "SINGAPORE_Za_SN2_WEB"
+        Za_SN1_NAME         = "AWS_SINGAPORE_NAT_Za_SN"
+        Za_SN2_NAME         = "AWS_SINGAPORE_WEB_Za_SN"
         Za_SN3_NAME         = ""
         Za_SN1_CIDR         = "10.3.1.0/24"
         Za_SN2_CIDR         = "10.3.3.0/24"
@@ -365,7 +365,7 @@ locals {
         Zb_SN1_CIDR         = ""
         Zb_SN2_CIDR         = ""
         Zb_SN3_CIDR         = ""
-        Zc_SN1_NAME         = "SINGAPORE_Zc_SN2"
+        Zc_SN1_NAME         = "AWS_SINGAPORE_Zc_SN"
         Zc_SN2_NAME         = ""
         Zc_SN3_NAME         = ""
         Zc_SN1_CIDR         = "10.3.4.0/24"
@@ -373,7 +373,7 @@ locals {
         Zc_SN3_CIDR         = ""
     }
     AWS_REG2_VPC2 = {
-        NAME                = "SINGAPORE_IDC_VPC"
+        NAME                = "IDC_SINGAPORE_VPC"
         CIDR                = "10.4.0.0/16"
         DNS_SUP             = true
         DNS_HOST            = true
@@ -383,8 +383,8 @@ locals {
         DHCP_DOMAIN_NTPs    = []
         DHCP_DOMAIN_NBSs    = []
         DHCP_DOMAIN_NODE    = null
-        Za_SN1_NAME         = "SINGAPORE_IDC_Za_SN1_CGW"
-        Za_SN2_NAME         = "SINGAPORE_IDC_Za_SN2_DB_DNS"
+        Za_SN1_NAME         = "IDC_SINGAPORE_CGW_Za_SN"
+        Za_SN2_NAME         = "IDC_SINGAPORE_DB_DNS_Za_SN"
         Za_SN3_NAME         = ""
         Za_SN1_CIDR         = "10.4.0.0/24"
         Za_SN2_CIDR         = "10.4.1.0/24"
@@ -405,7 +405,7 @@ locals {
     AWS_REG2_VPC1_RTBs = [
         # RTB1
         {   
-            NAME = "SINGAPORE_Za_SN1_RTB" 
+            NAME = "AWS_SINGAPORE_NAT_RTB" 
             SN_ID = module.AWS_REG2_VPC1.Za_SN1_ID
             ROUTE = [
                 {
@@ -428,7 +428,7 @@ locals {
         }
         # RTB2
         ,{
-            NAME = "SINGAPORE_Za_SN2_RTB"
+            NAME = "AWS_SINGAPORE_WEB_RTB"
             SN_ID = module.AWS_REG2_VPC1.Za_SN2_ID
             ROUTE = [
                 {
@@ -441,7 +441,7 @@ locals {
     AWS_REG2_VPC2_RTBs = [
         # RTB1
         {   
-            NAME = "SINGAPORE_IDC_Za_SN1_RTB" 
+            NAME = "IDC_SINGAPORE_CGW_RTB" 
             SN_ID = module.AWS_REG2_VPC2.Za_SN1_ID
             ROUTE = [
                 {
@@ -452,7 +452,7 @@ locals {
         }
         # RTB2
         ,{
-            NAME = "SINGAPORE_IDC_Za_SN2_RTB"
+            NAME = "IDC_SINGAPORE_DB_DNS_RTB"
             SN_ID = module.AWS_REG2_VPC2.Za_SN2_ID
             ROUTE = [
                 {
@@ -468,7 +468,7 @@ locals {
     ]
     AWS_REG2_VPC1_SGs = [
         {
-            NAME = "NAT_SG"
+            NAME = "AWS_SINGAPORE_NAT_SG"
             INGRESS = [
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -485,7 +485,7 @@ locals {
             ]
         }
         ,{
-            NAME = "WEB_SG"
+            NAME = "AWS_SINGAPORE_WEB_SG"
             INGRESS = [
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -502,7 +502,7 @@ locals {
     ]
     AWS_REG2_VPC2_SGs = [
         {
-            NAME = "CGW_SG"
+            NAME = "IDC_SINGAPORE_CGW_SG"
             INGRESS = [ 
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -519,7 +519,7 @@ locals {
             ]
         },
         {
-            NAME = "DB_SG"
+            NAME = "IDC_SINGAPORE_DB_SG"
             INGRESS = [ 
                 local.SG_ICMP,
                 local.SG_SSH,
@@ -534,7 +534,7 @@ locals {
             ]
         }        
         ,{
-            NAME = "DNS_SG"
+            NAME = "IDC_SINGAPORE_DNS_SG"
             INGRESS = [
                 local.SG_ICMP,
                 local.SG_SSH,
