@@ -29,20 +29,20 @@ locals {
 
     AWS_REG1_RT53_HC = [
         { 
-            NAME                = "websrv1_health"
+            NAME                = "AWS-SEOUL-WEB"
             DOMAIN              = "websrv1.${local.AWS_REG1_RT53_ZONE[0].DOMAIN_NAME}"
             PROTOCOL            = "HTTP"
             PORT                = 80
-            RESOURCE_PATH       = "/var/www/html/db.php"
+            RESOURCE_PATH       = "db.php"
             FAIL_THRESHOLD      = "5"
             REQ_INTERVAL        = "30"
         }
         ,{
-            NAME                = "websrv2_health"
+            NAME                = "AWS-SEOUL-WEB"
             DOMAIN              = "websrv2.${local.AWS_REG1_RT53_ZONE[0].DOMAIN_NAME}"
             PROTOCOL            = "HTTP"
             PORT                = 80
-            RESOURCE_PATH       = "/var/www/html/db.php"
+            RESOURCE_PATH       = "db.php"
             FAIL_THRESHOLD      = "5"
             REQ_INTERVAL        = "30"
         }
@@ -130,7 +130,7 @@ locals {
             HC_ENABLE = true
             HC_PROTOCOL = "HTTP"
             HC_PORT = "traffic-port"
-            HC_PATH = "/index.html"
+            HC_PATH = "/db.php"
             HC_HEALTHY_THRESHOLD = null
             HC_UNHEALTY_THRESHOLD = null
             HC_TIMEOUT = null
@@ -236,11 +236,11 @@ locals {
 
     AWS_REG2_RT53_HC = [
         {
-            NAME                = "websrv_health"
+            NAME                = "AWS-SINGAPORE-WEB"
             DOMAIN              = "websrv.${local.AWS_REG2_RT53_ZONE[0].DOMAIN_NAME}"
             PROTOCOL            = "HTTP"
             PORT                = 80
-            RESOURCE_PATH       = "/index.html"
+            RESOURCE_PATH       = "/db.php"
             FAIL_THRESHOLD      = "5"
             REQ_INTERVAL        = "30"
         }
@@ -345,7 +345,7 @@ locals {
             LS_ID = module.AWS_REG1_SERVICE.GAC_LS_ID[0]
             HC_PROTOCOL = "HTTP"
             HC_PORT = 80
-            HC_PATH = "/index.html"
+            HC_PATH = "/db.php"
             HC_INTERVAL = 30
             HC_THRESOLD_COUNT = null
             HC_DIST_VALUE = 100
@@ -364,7 +364,7 @@ locals {
             LS_ID = module.AWS_REG1_SERVICE.GAC_LS_ID[0]
             HC_PROTOCOL = "HTTP"
             HC_PORT = 80
-            HC_PATH = "/index.html"
+            HC_PATH = "/db.php"
             HC_INTERVAL = 30
             HC_THRESOLD_COUNT = null
             HC_DIST_VALUE = 100
