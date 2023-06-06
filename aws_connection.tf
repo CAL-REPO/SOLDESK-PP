@@ -2,17 +2,17 @@
 locals {
     AWS_REG1_IGW = [
         {
-            NAME = "SEOUL_VPC_IGW"
+            NAME = "AWS-SEOUL-IGW"
             VPC_ID = module.AWS_REG1_VPC1.VPC_ID
         }
         ,{
-            NAME = "SEOUL_IDC_IGW"
+            NAME = "IDC-SEOUL-IGW"
             VPC_ID = module.AWS_REG1_VPC2.VPC_ID
         }
     ]
     AWS_REG1_CGW = [
         {
-            NAME = "SEOUL_IDC_CGW"
+            NAME = "IDC-SEOUL-CGW"
             BGP_ASN = 65010
             IP = "${module.AWS_REG1_ADD.EIP_IP[2]}"
             TYPE = "ipsec.1"
@@ -20,7 +20,7 @@ locals {
     ]
     AWS_REG1_TGW = [
         {
-            NAME = "SEOUL_TGW"
+            NAME = "SEOUL-TGW"
             AWS_ASN = 65000
             DNS_SUP = "enable"
             VPN_ECMP_SUP = "enable"
@@ -31,7 +31,7 @@ locals {
     ]
     AWS_REG1_TGW_CON_VPC = [
         {
-            NAME = "SEOUL_TGW_VPC1"
+            NAME = "AWS-SEOUL-TGW"
             TGW_ID = module.AWS_REG1_CONNECTION.TGW_ID[0]
             TGW_RTB_ID = module.AWS_REG1_CONNECTION.TGW_RTB_ID[0]
             VPC_ID = module.AWS_REG1_VPC1.VPC_ID
@@ -40,7 +40,7 @@ locals {
     ]
     AWS_REG1_TGW_CON_CGW = [
         {
-            NAME = "SEOUL_TGW_CON_IDC"
+            NAME = "AWS-SEOUL-TGW-CON-IDC"
             TGW_ID = module.AWS_REG1_CONNECTION.TGW_ID[0]
             TGW_RTB_ID = module.AWS_REG1_CONNECTION.TGW_RTB_ID[0]
             DESTINATION_CIDR = "10.2.0.0/16"
@@ -60,7 +60,7 @@ locals {
 
     AWS_REG1_TGW_PEER_REQUEST = [
         {
-            NAME = "PEER_TO_SINGAPORE_TGW"
+            NAME = "PEER-TO-AWS-SINGAPORE-TGW"
             TGW_ID = module.AWS_REG1_CONNECTION.TGW_ID[0]
             TGW_RTB_ID = module.AWS_REG1_CONNECTION.TGW_RTB_ID[0]
             DESTINATION_CIDR = "10.3.0.0/16"
@@ -82,7 +82,7 @@ locals {
 
     AWS_REG1_PEER_REQUEST = [
         {
-            NAME = "PEER_TO_SINGAPORE_IDC"
+            NAME = "PEER-TO-IDC-SINGAPORE"
             VPC_ID = module.AWS_REG1_VPC2.VPC_ID
             PEER_OWNER_ID = module.AWS_REG2_KEY.OWNER_ID
             PEER_REGION_NAME = local.AWS_REGIONs[1].CODE
@@ -96,17 +96,17 @@ locals {
 locals {
     AWS_REG2_IGW = [
         {
-            NAME = "SINGAPORE_VPC_IGW"
+            NAME = "AWS-SINGAPORE-IGW"
             VPC_ID = module.AWS_REG2_VPC1.VPC_ID
         }
         ,{
-            NAME = "SINGAPORE_IDC_IGW"
+            NAME = "IDC-SINGAPORE-IGW"
             VPC_ID = module.AWS_REG2_VPC2.VPC_ID
         }
     ]
     AWS_REG2_CGW = [
         {
-            NAME = "SEOUL_IDC_CGW"
+            NAME = "IDC-SEOUL-CGW"
             BGP_ASN = 65110
             IP = "${module.AWS_REG2_ADD.EIP_IP[1]}"
             TYPE = "ipsec.1"
@@ -114,7 +114,7 @@ locals {
     ]
     AWS_REG2_TGW = [
         {
-            NAME = "SINGAPORE_TGW"
+            NAME = "SINGAPORE-TGW"
             AWS_ASN = 65100
             DNS_SUP = "enable"
             VPN_ECMP_SUP = "enable"
@@ -125,7 +125,7 @@ locals {
     ]
     AWS_REG2_TGW_CON_VPC = [
         {
-            NAME = "SINGAPORE_TGW_VPC1"
+            NAME = "AWS-SINGAPORE-TGW"
             TGW_ID = module.AWS_REG2_CONNECTION.TGW_ID[0]
             TGW_RTB_ID = module.AWS_REG2_CONNECTION.TGW_RTB_ID[0]
             VPC_ID = module.AWS_REG2_VPC1.VPC_ID
@@ -134,7 +134,7 @@ locals {
     ]
     AWS_REG2_TGW_CON_CGW = [
         {
-            NAME = "SINGAPORE_TGW_CON_IDC"
+            NAME = "AWS-SINGAPORE-TGW-CON-IDC"
             TGW_ID = module.AWS_REG2_CONNECTION.TGW_ID[0]
             TGW_RTB_ID = module.AWS_REG2_CONNECTION.TGW_RTB_ID[0]
             DESTINATION_CIDR = "10.4.0.0/16"
@@ -154,7 +154,7 @@ locals {
 
     AWS_REG2_TGW_PEER_ACCEPT = [
         {
-            NAME = "PEER_FROM_SEOUL_TGW1"
+            NAME = "PEER-FROM-AWS-SEOUL-TGW"
             TGW_ATT_ID = module.AWS_REG1_CONNECTION.TGW_PEER_ATT_ID[0]
             TGW_RTB_ID = module.AWS_REG2_CONNECTION.TGW_RTB_ID[0]
             DESTINATION_CIDR = "10.1.0.0/16"
@@ -172,7 +172,7 @@ locals {
 
     AWS_REG2_PEER_ACCEPT = [
         {
-            NAME = "PEER_FROM_SEOUL_IDC"
+            NAME = "PEER-FROM-IDC-SEOUL"
             PEER_ID = module.AWS_REG1_CONNECTION.PEER_ID[0]
             AUTO_ACCEPT = true
         }

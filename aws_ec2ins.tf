@@ -2,7 +2,7 @@
 locals {
     AWS_REG1_VPC1_INSs = [
         {
-            NAME = "SEOUL_INS1_NAT1"
+            NAME = "AWS-SEOUL-NAT1"
             KEY_NAME = module.AWS_REG1_KEY.KEY_NAME[0]
             AMI = "ami-0d6df09d036a47c3d"
             TYPE = "t2.micro"
@@ -16,7 +16,7 @@ locals {
             VOL_TYPE = "gp2"
         }
         ,{
-            NAME = "SEOUL_INS2_WEB1"
+            NAME = "AWS-SEOUL-WEB1"
             KEY_NAME = module.AWS_REG1_KEY.KEY_NAME[0]
             AMI = "ami-035da6a0773842f64"
             TYPE = "t2.micro"
@@ -30,7 +30,7 @@ locals {
             VOL_TYPE = "gp2"
         }
         ,{
-            NAME = "SEOUL_INS3_NAT2"
+            NAME = "AWS-SEOUL-NAT2"
             KEY_NAME = module.AWS_REG1_KEY.KEY_NAME[0]
             AMI = "ami-0d6df09d036a47c3d"
             TYPE = "t2.micro"
@@ -44,7 +44,7 @@ locals {
             VOL_TYPE = "gp2"
         }        
         ,{
-            NAME = "SEOUL_INS4_WEB2"
+            NAME = "AWS-SEOUL-WEB2"
             KEY_NAME = module.AWS_REG1_KEY.KEY_NAME[0]
             AMI = "ami-035da6a0773842f64"
             TYPE = "t2.micro"
@@ -200,7 +200,7 @@ locals {
 
     AWS_REG1_VPC2_INSs = [
         {
-            NAME = "SEOUL_IDC_INS1_CGW"
+            NAME = "IDC-SEOUL-CGW"
             KEY_NAME = module.AWS_REG1_KEY.KEY_NAME[0]
             AMI = "ami-035da6a0773842f64"
             TYPE = "t2.micro"
@@ -214,7 +214,7 @@ locals {
             VOL_TYPE = "gp2"
         }
         ,{
-            NAME = "SEOUL_IDC_INS2_DB"
+            NAME = "IDC-SEOUL-DB"
             KEY_NAME = module.AWS_REG1_KEY.KEY_NAME[0]
             AMI = "ami-035da6a0773842f64"
             TYPE = "t2.micro"
@@ -228,7 +228,7 @@ locals {
             VOL_TYPE = "gp2"
         }
         ,{
-            NAME = "SEOUL_IDC_INS3_DNS"
+            NAME = "IDC-SEOUL-DNS"
             KEY_NAME = module.AWS_REG1_KEY.KEY_NAME[0]
             AMI = "ami-035da6a0773842f64"
             TYPE = "t2.micro"
@@ -371,7 +371,7 @@ locals {
             10.2.1.200
             dnssrv.idcseoul.internal
             10.3.3.100
-            websrv1.awssingapore.internal
+            websrv.awssingapore.internal
             10.4.1.100
             dbsrv.idcsingapore.internal
             10.4.1.200
@@ -474,7 +474,7 @@ locals {
 locals {
     AWS_REG2_VPC1_INSs = [
         {
-            NAME = "SINGAPORE_INS1_NAT1"
+            NAME = "AWS-SINGAPORE-NAT1"
             KEY_NAME = module.AWS_REG2_KEY.KEY_NAME[0]
             AMI = "ami-036fb5fe12bc53979"
             TYPE = "t2.micro"
@@ -488,7 +488,7 @@ locals {
             VOL_TYPE = "gp2"
         }
         ,{
-            NAME = "SINGAPORE_INS2_WEB1"
+            NAME = "AWS-SINGAPORE-WEB1"
             KEY_NAME = module.AWS_REG2_KEY.KEY_NAME[0]
             AMI = "ami-06ebb7936bfa62864"
             TYPE = "t2.micro"
@@ -554,7 +554,7 @@ locals {
             sed -i "s/^PermitRootLogin forced-commands-only/PermitRootLogin yes/g" /etc/ssh/sshd_config
             sed -i 's/no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo '\''Please login as the user \\"ec2-user\\" rather than the user \\"root\\".'\'';echo;sleep 10" //' ~/.ssh/authorized_keys
             service sshd restart
-            hostnamectl --static set-hostname Singapore-AWS-WebSrv1
+            hostnamectl --static set-hostname Singapore-AWS-WebSrv
             yum update -y
             amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
             yum install -y httpd lynx
@@ -562,7 +562,7 @@ locals {
             curl -o /var/www/inc/dbinfo.inc https://cloudneta-book.s3.ap-northeast-2.amazonaws.com/chapter8/dbinfo.inc
             curl -o /var/www/html/db.php https://cloudneta-book.s3.ap-northeast-2.amazonaws.com/chapter8/db2.php
             rm -rf /var/www/html/index.html
-            echo "<h1>CloudNet@ FullLab - SingaporeRegion - Websrv1</h1>" > /var/www/html/index.html
+            echo "<h1>CloudNet@ FullLab - SingaporeRegion - Websrv</h1>" > /var/www/html/index.html
             systemctl start httpd && systemctl enable httpd
             curl -o /opt/pingcheck.sh https://cloudneta-book.s3.ap-northeast-2.amazonaws.com/chapter8/pingchecker2.sh
             chmod +x /opt/pingcheck.sh
@@ -576,7 +576,7 @@ locals {
 
     AWS_REG2_VPC2_INSs = [
         {
-            NAME = "SINGAPORE_IDC_INS1_CGW"
+            NAME = "IDC-SINGAPORE-CGW"
             KEY_NAME = module.AWS_REG2_KEY.KEY_NAME[0]
             AMI = "ami-06ebb7936bfa62864"
             TYPE = "t2.micro"
@@ -590,7 +590,7 @@ locals {
             VOL_TYPE = "gp2"
         }
         ,{
-            NAME = "SINGAPORE_IDC_INS2_DB"
+            NAME = "IDC-SINGAPORE-DB"
             KEY_NAME = module.AWS_REG2_KEY.KEY_NAME[0]
             AMI = "ami-06ebb7936bfa62864"
             TYPE = "t2.micro"
@@ -604,7 +604,7 @@ locals {
             VOL_TYPE = "gp2"
         }
         ,{
-            NAME = "SINGAPORE_IDC_INS3_DNS"
+            NAME = "IDC-SINGAPORE-DNS"
             KEY_NAME = module.AWS_REG2_KEY.KEY_NAME[0]
             AMI = "ami-06ebb7936bfa62864"
             TYPE = "t2.micro"
@@ -748,7 +748,7 @@ locals {
             10.2.1.200
             dnssrv.idcseoul.internal
             10.3.3.100
-            websrv1.awssingapore.internal
+            websrv.awssingapore.internal
             10.4.1.100
             dbsrv.idcsingapore.internal
             10.4.1.200
@@ -778,6 +778,7 @@ locals {
             mysql -uroot -pqwe123 <<-EOT
             START SLAVE
             EOT
+            systemctl restart mariadb
             EOF
         }
         ,{

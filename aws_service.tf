@@ -2,7 +2,7 @@
 locals {
     AWS_REG1_RT53_ZONE = [
         {  
-            NAME = "SEOUL_AWS"
+            NAME = "AWS-SEOUL"
             REGION_ID = local.AWS_REGIONs[0].CODE
             VPC_ID = module.AWS_REG1_VPC1.VPC_ID                
             DOMAIN_NAME = "awsseoul.internal"
@@ -50,7 +50,7 @@ locals {
 
     AWS_REG1_RT53_RESOLV_EP = [
         {  
-            NAME        = "AWS_SEOUL_EP_IN"
+            NAME        = "AWS-SEOUL-EP-IN"
             DIRECTION   = "INBOUND"
             SG_IDs      = [module.AWS_REG1_VPC1.SG_ID[0]]
             IPs = [
@@ -65,7 +65,7 @@ locals {
             ]
         }
         ,{  
-            NAME        = "AWS_SEOUL_EP_OUT"
+            NAME        = "AWS-SEOUL-EP-OUT"
             DIRECTION   = "OUTBOUND"
             SG_IDs      = [module.AWS_REG1_VPC1.SG_ID[0]]
             IPs = [
@@ -83,7 +83,7 @@ locals {
 
     AWS_REG1_RT53_RESOLV_EP_RULE = [
         {  
-            NAME            = "EP_OUT_IDCSEOUL"
+            NAME            = "EP-RULE-IDC-SEOUL"
             EP_ID           = module.AWS_REG1_SERVICE.RT53_RESOLVE_EP_ID[1]
             DOMAIN_NAME     = "idcseoul.internal"
             RULE_TYPE       = "FORWARD"
@@ -95,7 +95,7 @@ locals {
             ]
         }
         ,{  
-            NAME            = "EP_OUT_AWSSINGAPORE"
+            NAME            = "EP-RULE-AWS-SINGAPORE"
             EP_ID           = module.AWS_REG1_SERVICE.RT53_RESOLVE_EP_ID[1]
             DOMAIN_NAME     = "awssingapore.internal"
             RULE_TYPE       = "FORWARD"
@@ -107,7 +107,7 @@ locals {
             ]
         }
         ,{  
-            NAME            = "EP_OUT_IDCSINGAPORE"
+            NAME            = "EP-RULE-IDC-SINGAPORE"
             EP_ID           = module.AWS_REG1_SERVICE.RT53_RESOLVE_EP_ID[1]
             DOMAIN_NAME     = "idcsingapore.internal"
             RULE_TYPE       = "FORWARD"
@@ -122,7 +122,7 @@ locals {
 
     AWS_REG1_LB_TG = [
         {
-            NAME = "SEOUL-LB-TG"
+            NAME = "AWS-SEOUL-LB-TG"
             TARGET_TYPE = "instance" # "instance", "ip", "lambda", "alb"
             PORT = 80
             PROTOCOL = "HTTP"
@@ -155,7 +155,7 @@ locals {
     AWS_REG1_LB = [
         {
         
-            NAME = "SEOUL-LB"
+            NAME = "AWS-SEOUL-LB"
             TYPE = "application" # "application", "network"
             INTERNAL = false
             SNs = [module.AWS_REG1_VPC1.Za_SN1_ID, module.AWS_REG1_VPC1.Zc_SN1_ID]
@@ -173,7 +173,7 @@ locals {
 
     AWS_REG1_LB_LS = [
         {
-            NAME        = "SEOUL_LB_LS"
+            NAME        = "AWS-SEOUL-LB-LS"
             PRIORITY    = 100
             PORT        = 80
             DEFAULT_ACTION = [
@@ -216,7 +216,7 @@ locals {
         
     AWS_REG2_RT53_ZONE = [
         {  
-            NAME = "SINGAPORE_AWS"
+            NAME = "AWS-SINGAPORE"
             REGION_ID = local.AWS_REGIONs[1].CODE
             VPC_ID = module.AWS_REG2_VPC1.VPC_ID
             DOMAIN_NAME = "awssingapore.internal"
@@ -227,7 +227,7 @@ locals {
     AWS_REG2_RT53_ZONE_RECORD = [
         {
             ZONE_ID = module.AWS_REG2_SERVICE.RT53_ZONE_ID[0]
-            NAME = "websrv1.${local.AWS_REG2_RT53_ZONE[0].DOMAIN_NAME}"           
+            NAME = "websrv.${local.AWS_REG2_RT53_ZONE[0].DOMAIN_NAME}"           
             TYPE = "A"
             TTL = 300
             IPs = ["10.3.3.100"]
@@ -236,8 +236,8 @@ locals {
 
     AWS_REG2_RT53_HC = [
         {
-            NAME                = "websrv1_health"
-            DOMAIN              = "websrv1.${local.AWS_REG2_RT53_ZONE[0].DOMAIN_NAME}"
+            NAME                = "websrv_health"
+            DOMAIN              = "websrv.${local.AWS_REG2_RT53_ZONE[0].DOMAIN_NAME}"
             PROTOCOL            = "HTTP"
             PORT                = 80
             RESOURCE_PATH       = "/index.html"
@@ -248,7 +248,7 @@ locals {
 
     AWS_REG2_RT53_RESOLV_EP = [
         {  
-            NAME        = "AWS_SINGAPORE_EP_IN"
+            NAME        = "AWS-SINGAPORE-EP-IN"
             DIRECTION   = "INBOUND"
             SG_IDs      = [module.AWS_REG2_VPC1.SG_ID[0]]
             IPs = [
@@ -263,7 +263,7 @@ locals {
             ]
         }
         ,{  
-            NAME        = "AWS_SINGAPORE_EP_OUT"
+            NAME        = "AWS-SINGAPORE-EP-OUT"
             DIRECTION   = "OUTBOUND" 
             SG_IDs      = [module.AWS_REG2_VPC1.SG_ID[0]]
             IPs = [
@@ -281,7 +281,7 @@ locals {
 
     AWS_REG2_RT53_RESOLV_EP_RULE = [
         {  
-            NAME            = "EP_OUT_IDCSINGAPORE"
+            NAME            = "EP-RULE-IDC-SINGAPORE"
             EP_ID           = module.AWS_REG2_SERVICE.RT53_RESOLVE_EP_ID[1]
             DOMAIN_NAME     = "idcsingapore.internal"
             RULE_TYPE       = "FORWARD"
@@ -293,7 +293,7 @@ locals {
             ]
         }
         ,{  
-            NAME            = "EP_OUT_AWSSEOUL"
+            NAME            = "EP-RULE-AWS-SEOUL"
             EP_ID           = module.AWS_REG2_SERVICE.RT53_RESOLVE_EP_ID[1]
             DOMAIN_NAME     = "awsseoul.internal"
             RULE_TYPE       = "FORWARD"
@@ -305,7 +305,7 @@ locals {
             ]
         }
         ,{  
-            NAME            = "EP_OUT_IDCSEOUL"
+            NAME            = "EP-RULE-IDC-SEOUL"
             EP_ID           = module.AWS_REG2_SERVICE.RT53_RESOLVE_EP_ID[1]
             DOMAIN_NAME     = "idcseoul.internal"
             RULE_TYPE       = "FORWARD"
