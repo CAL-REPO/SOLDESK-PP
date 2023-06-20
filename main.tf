@@ -1,7 +1,7 @@
 # Standard AWS Provider Block
 terraform {
     required_version = ">= 1.0"
-    required_providers {
+    required_providers { 
         aws = {
             source  = "hashicorp/aws"
             version = ">= 5.0"
@@ -17,7 +17,7 @@ provider "aws" {
 }
 
 module "AWS_REG1_KEY" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2KEY.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//EC2KEY?ref=1.0"
     providers = {
         aws = aws.Seoul
     }
@@ -27,7 +27,7 @@ module "AWS_REG1_KEY" {
 }
 
 module "AWS_REG1_ADD" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-ADD.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//ADD?ref=1.0"
     providers = {
         aws = aws.Seoul
     }
@@ -37,7 +37,7 @@ module "AWS_REG1_ADD" {
 }
 
 module "AWS_REG1_VPC1" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-VPC.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//VPC?ref=1.0"
     providers = {
         aws = aws.Seoul
     }
@@ -49,7 +49,7 @@ module "AWS_REG1_VPC1" {
 }
 
 module "AWS_REG1_VPC1_INS" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2INS.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//EC2INS?ref=1.0"
     providers = {
         aws = aws.Seoul
     }
@@ -60,7 +60,7 @@ module "AWS_REG1_VPC1_INS" {
 }
 
 module "AWS_REG1_VPC2" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-VPC.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//VPC?ref=1.0"
     providers = {
         aws = aws.Seoul
     }
@@ -72,7 +72,7 @@ module "AWS_REG1_VPC2" {
 }
 
 module "AWS_REG1_VPC2_INS" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2INS.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//EC2INS?ref=1.0"
     providers = {
         aws = aws.Seoul
     }
@@ -83,7 +83,7 @@ module "AWS_REG1_VPC2_INS" {
 }
 
 module "AWS_REG1_CONNECTION" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-CONNECTION.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//CONNECTION?ref=1.0"
     providers = {
         aws = aws.Seoul
     }
@@ -100,7 +100,7 @@ module "AWS_REG1_CONNECTION" {
 }
 
 module "AWS_REG1_SERVICE" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-SERVICE.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//SERVICE?ref=1.0"
     providers = {
         aws = aws.Seoul
     }
@@ -127,7 +127,7 @@ provider "aws" {
 }
 
 module "AWS_REG2_KEY" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2KEY.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//EC2KEY?ref=1.0"
     providers = {
         aws = aws.Singapore
     }
@@ -137,7 +137,7 @@ module "AWS_REG2_KEY" {
 }
 
 module "AWS_REG2_ADD" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-ADD.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//ADD?ref=1.0"
     providers = {
         aws = aws.Singapore
     }
@@ -147,7 +147,7 @@ module "AWS_REG2_ADD" {
 }
 
 module "AWS_REG2_VPC1" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-VPC.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//VPC?ref=1.0"
     providers = {
         aws = aws.Singapore
     }
@@ -159,7 +159,7 @@ module "AWS_REG2_VPC1" {
 }
 
 module "AWS_REG2_VPC1_INS" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2INS.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//EC2INS?ref=1.0"
     providers = {
         aws = aws.Singapore
     }
@@ -170,7 +170,7 @@ module "AWS_REG2_VPC1_INS" {
 }
 
 module "AWS_REG2_VPC2" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-VPC.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//VPC?ref=1.0"
     providers = {
         aws = aws.Singapore
     }
@@ -182,7 +182,7 @@ module "AWS_REG2_VPC2" {
 }
 
 module "AWS_REG2_VPC2_INS" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-EC2INS.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//EC2INS?ref=1.0"
     providers = {
         aws = aws.Singapore
     }
@@ -193,7 +193,7 @@ module "AWS_REG2_VPC2_INS" {
 }
 
 module "AWS_REG2_CONNECTION" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-CONNECTION.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//CONNECTION?ref=1.0"
     providers = {
         aws = aws.Singapore
     }
@@ -210,7 +210,7 @@ module "AWS_REG2_CONNECTION" {
 }
 
 module "AWS_REG2_SERVICE" {
-    source = "git@github.com:CAL-REPO/TERRAFORM-AWS-SERVICE.git"
+    source = "git::https://github.com/CAL-REPO/TERRAFORM-AWS-MODULES.git//SERVICE?ref=1.0"
     providers = {
         aws = aws.Singapore
     }
