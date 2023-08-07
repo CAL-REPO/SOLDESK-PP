@@ -22,7 +22,7 @@ locals {
     AWS_PROFILEs = {
         for EACH, AWS_REGION in local.AWS_REGIONs:
             EACH => {
-                NAME = "${local.AWS_PROFILE}_${AWS_REGION.NAME}"
+                NAME = "${local.AWS_PROFILE}-${AWS_REGION.NAME}"
             }
     }
 
